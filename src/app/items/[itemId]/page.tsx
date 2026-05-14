@@ -49,10 +49,17 @@ export default function DetailPage({ params }: DetailPageProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // 3MB 용량 제한
-    const MAX_SIZE = 3 * 1024 * 1024;
+    // 5MB 용량 제한
+    const MAX_SIZE = 5 * 1024 * 1024;
     if (file.size > MAX_SIZE) {
-      alert("이미지 크기는 3MB 이하여야 합니다.");
+      alert("이미지 크기는 5MB 이하여야 합니다.");
+      return;
+    }
+
+    // 파일 이름이 영어로만 이루어졌는지 확인
+    const isEnglishOnly = /^[a-zA-Z0-9.\-_]+$/.test(file.name);
+    if (!isEnglishOnly) {
+      alert("이미지 파일 이름은 영어로만 이루어져야 합니다.");
       return;
     }
 
