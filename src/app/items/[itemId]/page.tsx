@@ -106,7 +106,8 @@ export default function DetailPage({ params }: DetailPageProps) {
       <div className={`flex items-center justify-center h-[48px] tablet:h-[64px] pc:w-[996px] pc:h-[64px] pc:mx-auto pc:flex pc:items-center pc:justify-center border-2 border-black rounded-[24px] transition-colors mb-[25px] tablet:mb-0 pc:mb-0 ${
         isCompleted ? 'bg-[#EDE9FE]' : 'bg-white'
       }`}>
-        <div className="flex items-center gap-4 pc:gap-[16px] pc:flex pc:items-center pc:justify-center">
+        {/* 체크박스와 텍스트를 묶어주는 세트 (텍스트 길이에 맞춰 너비가 유동적으로 변함) */}
+        <div className="flex items-center gap-4 pc:gap-[16px] w-auto">
           {/* 체크박스 */}
           <button 
             onClick={() => setIsCompleted(!isCompleted)}
@@ -123,13 +124,15 @@ export default function DetailPage({ params }: DetailPageProps) {
           
           {/* 제목 영역 */}
           <div className="inline-grid items-center">
-             <span className="invisible whitespace-pre text-xl pc:text-[32px] pc:leading-[32px] font-bold col-start-1 row-start-1 px-1">
+             {/* px-1 등 불필요한 여백을 제거하여 체크박스와 정확히 16px을 유지하도록 함 */}
+             <span className="invisible whitespace-pre text-xl pc:text-[32px] pc:leading-[32px] font-bold col-start-1 row-start-1 pc:text-center">
                {name || "할 일 제목을 입력하세요"}
              </span>
              <input
                value={name}
                onChange={(e) => setName(e.target.value)}
-               className="col-start-1 row-start-1 w-full text-xl pc:text-[32px] pc:leading-[32px] font-bold bg-transparent focus:outline-none border-none text-slate-900 text-left p-0 m-0 outline-none underline underline-offset-4 decoration-1"
+               size={1}
+               className="col-start-1 row-start-1 w-full min-w-0 text-xl pc:text-[32px] pc:leading-[32px] font-bold bg-transparent focus:outline-none border-none text-slate-900 text-left pc:text-center p-0 m-0 outline-none underline underline-offset-4 decoration-1"
                placeholder="할 일 제목을 입력하세요"
              />
           </div>
